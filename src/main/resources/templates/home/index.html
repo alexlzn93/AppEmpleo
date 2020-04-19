@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>JobsAPP</title>
+</head>
+<body>
+<div><img th:src="@{/images/job.jpg}" width="300" height="150"></div>
+<h1 th:text="${bienvenido}+' .Tu pagina para encontrar trabajo'"> </h1>
+<a th:href="@{/vacantes}">Ver los empleos disponibles</a>
+</body>
+</html>

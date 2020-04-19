@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<meta charset="ISO-8859-1">
+<title>Listado ofertas de trabajo</title>
+</head>
+<body>
+<div><img th:src="@{/images/job.jpg}" width="300" height="150"></div>
+<h1 class="text-info">OFERTAS DISPONIBLES</h1>
+<!-- EJEMPLO DE TABLA Y FOR EACH CON THYMELEAF -->
+<table class="table table-bordered table-hover">
+  <thead class="thead-light">
+	    <tr>
+	    	<th>Empresa</th>
+	    	<th>ID</th>
+	        <th>Nombre</th>
+	        <th>Descripcion</th>
+	        <th>Fecha</th>
+	        <th>Salario</th>
+	        <th>Destacada</th>
+	        <th>Detalle</th>
+	        <th>Eliminar</th>
+	    </tr>
+   </thead>
+   <tbody>
+    <tr th:each="vacantes : ${list_vacantes}">
+    	<td>
+    	<!-- EJEMPLO DE COMO SE DESPLIEGAN IMAGENES DINAMICAS {img} es la variable-->
+        <img th:src="@{/images/{img} (img=${vacantes.images} ) }" width="50" height="50"> 
+        </td>
+        <td th:text="${vacantes.id}"></td>
+        <td th:text="${vacantes.nombre}"></td>
+        <td th:text="${vacantes.descripcion}"></td>
+        <td th:text="${vacantes.fecha}"></td>
+        <td th:text="${vacantes.salario}+ ' euros'"></td>
+        <td>
+        <!-- EJEMPLO CONDICIONALES IF-UNLESS EN THYMELEAF -->
+   		<span class="badge  badge-success" th:if="${vacantes.destacada==1}">SI </span> <!-- if: si es 1 =SI -->
+   		<span class="badge  badge-danger"  th:unless="${vacantes.destacada==1}">NO</span> <!-- unless: si no es 1 =NO -->
+   		</td>
+   		<td>
+   			<!-- @PathVariable para ver el id de la vacante GET-->
+   			<a th:href="@{vacantes/verDetalle/{id} (id=${vacantes.id}) }" class="btn btn-outline-success">Ver Oferta</a>
+   		</td>
+   		<td>
+   			<!-- @RequestParam para ver el id de la vacante GET-->
+   			<a th:href="@{vacantes/delete(id=${vacantes.id}) }" class="btn btn-outline-danger">Eliminar</a>
+   		</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
