@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,6 +25,17 @@ public class VacantesController {
 		//LISTA EN UNA TABLE TODAS LAS VACANTES DE LA LISTA
 		model.addAttribute("list_vacantes", vacanteService.listVacantes());
 		return "vacantes/vacantes";
+	}
+	@GetMapping("/create")
+	public String nuevaVacante(Model model,@ModelAttribute Vacante vacante) {
+		//FORMULARIO PARA CREAR UNA VACANTE NUEVA
+		return "vacantes/formVacante";
+	}
+	@PostMapping("/save")
+	public String saveVacante(Model model,@ModelAttribute Vacante vacante) {
+		//GUARDA E LA BBDD UNA NUEVA OFERTA
+		vacanteService.guardar(vacante);
+		return "home/index";
 	}
 	
 	@GetMapping("/delete")
