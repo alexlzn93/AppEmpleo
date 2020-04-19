@@ -44,11 +44,11 @@
    		</td>
    		<td>
    			<!-- @PathVariable para ver el id de la vacante GET-->
-   			<a th:href="@{vacantes/verDetalle/{id} (id=${vacantes.id}) }" class="btn btn-outline-success">Ver Oferta</a>
+   			<a th:href="@{/vacantes/verDetalle/{id} (id=${vacantes.id}) }" class="btn btn-outline-success">Ver Oferta</a>
    		</td>
    		<td>
    			<!-- @RequestParam para ver el id de la vacante GET-->
-   			<a th:href="@{vacantes/delete(id=${vacantes.id}) }" class="btn btn-outline-danger">Eliminar</a>
+   			<a th:href="@{/vacantes/delete(id=${vacantes.id}) }" class="btn btn-outline-danger">Eliminar</a>
    		</td>
     </tr>
     </tbody>

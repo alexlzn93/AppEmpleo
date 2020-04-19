@@ -7,9 +7,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.alexlzn.util.ListaVacantes;
+
 @Controller
 @RequestMapping("/vacantes")
 public class VacantesController {
+	
+	@GetMapping("/")
+	public String listVacantes(Model model) {
+		//LISTA EN UNA TABLE TODAS LAS VACANTES DE LA LISTA
+		model.addAttribute("list_vacantes", ListaVacantes.getVacantes());
+		return "vacantes/vacantes";
+	}
 	
 	@GetMapping("/delete")
 	public String delete(@RequestParam("id") int idVacante,Model model) {

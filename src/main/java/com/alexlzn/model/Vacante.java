@@ -3,13 +3,19 @@ package com.alexlzn.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Vacante {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String nombre;
 	private String descripcion;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date fecha;
 	private double salario;
 	private int destacada; //1=destacada 0=no destacada
