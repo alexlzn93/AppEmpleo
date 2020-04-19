@@ -6,6 +6,10 @@
 </head>
 <body>
 <h1>Detalles de la oferta de trabajo</h1>
-<a th:text="'id : '+${id} + 'de la vacante'"></a>
+<a th:text="'ID: '+${id} + 'de la vacante'"></a><br>
+<a th:text="'Nombre: '+${vacante.nombre}"></a><br>
+<a th:text="'Descripcion: '+${vacante.descripcion}"></a><br>
+<a th:text="'Fecha: '+${vacante.fecha}"></a><br>
+<a th:text="'Sueldo: '+${vacante.salario}"></a>
 </body>
 </html>

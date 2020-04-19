@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.alexlzn.interfaces.IVacantesService;
 import com.alexlzn.model.Vacante;
 import com.alexlzn.repository.IVacanteRepository;
+import com.alexlzn.util.ListaVacantes;
 @Service
 public class VacantesService implements IVacantesService {
 	
@@ -35,12 +36,29 @@ public class VacantesService implements IVacantesService {
 	}
 
 	@Override
-	public Vacante findById(int id) {
-		Optional<Vacante> vacante= vacanteRepo.findById(id);
+	public Vacante buscarPorId(int idVacante) {
+		Optional<Vacante> vacante= vacanteRepo.findById(idVacante);
 		if(vacante.isPresent()) {
 			return vacante.get();
 		}
-		System.out.println("No se encuentra la vacante con id: " + id);
+		System.out.println("No se encuentra la vacante con id: " + idVacante);
+		return null;
+	}
+
+	//NO BASE DE DATOS ListaVacantes
+	@Override
+	public List<Vacante> listVacantes() {
+		List<Vacante> vacantes= ListaVacantes.getVacantes();
+		return vacantes;
+	}
+
+	@Override
+	public Vacante findPorId(int idVacante) {
+		for (Vacante v : ListaVacantes.getVacantes()) {
+			if(v.getId()==idVacante) {
+				return v;
+			}
+		}
 		return null;
 	}
 
