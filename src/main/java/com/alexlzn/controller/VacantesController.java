@@ -17,6 +17,7 @@ import com.alexlzn.util.ListaVacantes;
 @Controller
 @RequestMapping("/vacantes")
 public class VacantesController {
+	
 	@Autowired
 	IVacantesService vacanteService;
 	
@@ -24,11 +25,12 @@ public class VacantesController {
 	public String listVacantes(Model model) {
 		//LISTA EN UNA TABLE TODAS LAS VACANTES DE LA LISTA
 		model.addAttribute("list_vacantes", vacanteService.listVacantes());
-		return "vacantes/vacantes";
+		return "vacantes/listVacantes";
 	}
 	@GetMapping("/create")
 	public String nuevaVacante(Model model,@ModelAttribute Vacante vacante) {
 		//FORMULARIO PARA CREAR UNA VACANTE NUEVA
+		vacanteService.guardar(vacante);
 		return "vacantes/formVacante";
 	}
 	@PostMapping("/save")
@@ -41,7 +43,15 @@ public class VacantesController {
 	@GetMapping("/delete")
 	public String delete(@RequestParam("id") int idVacante,Model model) {
 		model.addAttribute("id", idVacante);
+		vacanteService.delete(idVacante);
 		return "mensajeEliminado";
+	}
+	
+	@GetMapping("/editar")
+	public String editar(@RequestParam("id") int idVacante,Model model) {
+		model.addAttribute("id", idVacante);
+		vacanteService.buscarPorId(idVacante);
+		return "redirect:/vacantes/formVacante";
 	}
 
 	@GetMapping("/verDetalle/{id}")

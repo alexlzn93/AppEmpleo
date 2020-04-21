@@ -11,7 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Vacante {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String nombre;
 	private String descripcion;
