@@ -18,26 +18,28 @@ public class Vacante {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date fecha;
 	private double salario;
-	private int destacada; //1=destacada 0=no destacada
+	private int destacado; //1=destacada 0=no destacada
 	private String images="no_image.jpg";
+	private String status;
+	private String detalles;
 
 	public Vacante() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Vacante(int id, String nombre, String descripcion, Date fecha, double salario, int destacada,
-			String images) {
+	public Vacante(int id, String nombre, String descripcion, Date fecha, double salario, int destacado, String images,
+			String status, String detalles) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.fecha = fecha;
 		this.salario = salario;
-		this.destacada = destacada;
+		this.destacado = destacado;
 		this.images = images;
+		this.status = status;
+		this.detalles = detalles;
 	}
-
-
 
 
 	public String getImages() {
@@ -50,12 +52,12 @@ public class Vacante {
 	}
 
 
-	public int getDestacada() {
-		return destacada;
+	public int getDestacado() {
+		return destacado;
 	}
 
-	public void setDestacada(int destacada) {
-		this.destacada = destacada;
+	public void setDestacada(int destacado) {
+		this.destacado = destacado;
 	}
 
 	public int getId() {
@@ -98,12 +100,25 @@ public class Vacante {
 		this.salario = salario;
 	}
 
-
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getDetalles() {
+		return detalles;
+	}
+	public void setDetalles(String detalles) {
+		this.detalles = detalles;
+	}
 	@Override
 	public String toString() {
 		return "Vacante [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", fecha=" + fecha
-				+ ", salario=" + salario + ", destacada=" + destacada + ", images=" + images + "]";
+				+ ", salario=" + salario + ", destacada=" + destacado + ", images=" + images + ", status=" + status
+				+ ", detalles=" + detalles + "]";
 	}
+	
 
 	
 
