@@ -45,7 +45,7 @@ public class VacantesService implements IVacantesService {
 		return null;
 	}
 
-	//NO BASE DE DATOS ListaVacantes
+	//NO BASE DE DATOS ListaVacantes.class
 	@Override
 	public List<Vacante> listVacantes() {
 		List<Vacante> vacantes= ListaVacantes.getVacantes();
@@ -60,6 +60,12 @@ public class VacantesService implements IVacantesService {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void guardarEnListaVacantes(Vacante vacantes) {
+		ListaVacantes.addVacante(vacantes);
+		
 	}
 
 }
