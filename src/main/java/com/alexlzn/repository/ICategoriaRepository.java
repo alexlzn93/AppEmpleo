@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.alexlzn.model.Categoria;
 @Repository
-public interface ICategoriaRepository extends CrudRepository<Categoria,String> {
+public interface ICategoriaRepository extends CrudRepository<Categoria,Integer> {
 
 }
