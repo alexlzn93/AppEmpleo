@@ -1,6 +1,7 @@
 package com.alexlzn.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,9 +22,9 @@ public class CategoriasService implements ICategoriaService {
 	}
 
 	@Override
-	public void delete(Categoria categoria) {
+	public void delete(int idcategoria) {
 		System.out.println("Eliminando categoria");
-		categoriaRepo.delete(categoria);
+		categoriaRepo.deleteById(idcategoria);
 
 	}
 
@@ -31,6 +32,16 @@ public class CategoriasService implements ICategoriaService {
 	public List<Categoria> findAllCategoria() {
 		System.out.println("Listado de Categorias");
 		return (List<Categoria>) categoriaRepo.findAll();
+	}
+
+	@Override
+	public Categoria buscarPorId(int idcategoria) {
+		Optional<Categoria> categoria=categoriaRepo.findById(idcategoria);
+		if(categoria.isPresent()) {
+			return categoria.get();
+		}
+		System.out.println("No se encuentra la categoria con ID: " + idcategoria);
+		return null;
 	}
 
 }
