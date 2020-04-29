@@ -1,6 +1,5 @@
 package com.alexlzn.controller;
 
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.alexlzn.interfaces.IVacantesService;
 import com.alexlzn.model.Vacante;
@@ -43,16 +43,17 @@ public class VacantesController {
 		return "vacantes/formVacante";
 	}
 	@PostMapping("/save")
-	public String saveVacante(Vacante vacante,BindingResult result) { //DATA BINDING
+	public String saveVacante(Vacante vacante,BindingResult result,RedirectAttributes attributes) { //DATA BINDING
 		//GUARDA E LA BBDD UNA NUEVA OFERTA
 		//vacanteService.guardar(vacante); BBDD
 		if(result.hasErrors()) {
 			System.out.println("Ocurrio un error al introducir los datos del formulario");
 			return "vacantes/formVacante"; //si hay errores en el formulario devuelvo la vista 
 		}
+		attributes.addFlashAttribute("mensaje", "Vacante guardada correctamente"); //atributo flash
 		vacanteService.guardarEnListaVacantes(vacante);//no base de datos
 		System.out.println(vacante);
-		return "vacantes/listVacantes";
+		return "redirect:/vacantes/index"; //redirect al metodo index.
 	}
 	
 	@GetMapping("/delete")
