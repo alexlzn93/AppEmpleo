@@ -20,7 +20,7 @@ public class HomeController {
 	@GetMapping("/")
 	public String goHome(Model model) {
 		//PAGINA PRINCIPAL
-		List<Vacante> listVacantes= vacanteService.listVacantes();
+		List<Vacante> listVacantes= vacanteService.findAllVacantes();
 		model.addAttribute("vacantes", listVacantes);
 		return "home/index"; //home es la carpeta donde estaran html del controlador HomeController
 	}

@@ -29,7 +29,7 @@
           <div class="card-body">
             <a class="btn btn-primary" th:href="@{/vacantes/create}" title="Crear nueva Oferta de Trabajo" role="button"><i class="fas fa-file" aria-hidden="true"></i> Nueva</a>            
             <hr>
-            <div th:if="${mensaje !=null}" class='alert alert-success' th:text="${mensaje}" role='alert'></div>
+            <div th:if="${mensaje !=null}" class='alert alert-success' th:text="${mensaje}" role='alert'></div><!-- atribute flash -->
             <table class="table table-hover" >
               <thead class="thead-light">
                 <tr>
@@ -42,21 +42,24 @@
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="vacante: ${list_vacantes}">
-                  <td>Categoria</td>
-                  <td th:text="${vacante.nombre}"></td>                  
-                  <td th:text="${vacante.fecha}"></td>
-                  <td th:text="${vacante.status}"></td>
-                  <td>
-                  	<span class="badge  badge-success" th:if="${vacante.destacado==1}">SI </span> <!-- if: si es 1 =SI -->
-   					<span class="badge  badge-danger"  th:unless="${vacante.destacado==1}">NO</span> <!-- unless: si no es 1 =NO -->
-                  </td>
-                  <td>
-                    <a th:href="@{/vacantes/editar(id=${vacante.id})}" class="btn btn-outline-success">Editar</a>
-                    <a th:href="@{/vacantes/delete(id=${vacante.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-outline-danger" title="Eliminar el registro.">Eliminar<i class="fas fa-trash" aria-hidden="true"></i></a>
-                    
-                  </td>
+                <tr th:each="vacante: ${list_vacantes}" th:object="${vacante}">
+              
+	                  <td th:text="${vacante.categoria.nombre}"></td>
+	                  <td th:text="${vacante.nombre}"></td>                  
+	                  <td th:text="${vacante.fecha}"></td>
+	                  <td th:text="${vacante.status}"></td>
+	                  
+	                  <td>
+	                  	<span class="badge  badge-success" th:if="${vacante.destacado==1}">SI </span> <!-- if: si es 1 =SI -->
+	   					<span class="badge  badge-danger"  th:unless="${vacante.destacado==1}">NO</span> <!-- unless: si no es 1 =NO -->
+	                  </td>
+	                  <td>
+	                    <a th:href="@{/vacantes/editar(id=${vacante.id})}" class="btn btn-outline-success">Editar</a>
+	                    <a th:href="@{/vacantes/delete(id=${vacante.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-outline-danger" title="Eliminar el registro.">Eliminar<i class="fas fa-trash" aria-hidden="true"></i></a>
+	                    
+	                  </td>
                 </tr>
+               
                </tbody>
             </table>
             
