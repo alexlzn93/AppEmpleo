@@ -44,7 +44,7 @@ public class VacantesController {
 		return "vacantes/listVacantes";
 	}
 	@GetMapping("/create")
-	public String nuevaVacante(Vacante vacante,Model model) { //th:object="${vacante}" DATA BINDING
+	public String nuevaVacante(Vacante vacante,Model model) { //th:object="${vacante}" DATA BINDING form con Beans
 		//FORMULARIO PARA CREAR UNA VACANTE NUEVA
 		//desplegar en el option la lista de las categorias
 		model.addAttribute("categorias", categoriasService.findAllCategoria()); 
@@ -66,8 +66,6 @@ public class VacantesController {
 			if(nombreImagen !=null) {
 				vacante.setImages(nombreImagen);
 			}
-			
-			
 		}
 		
 		attributes.addFlashAttribute("mensaje", "Vacante guardada correctamente"); //atributo flash

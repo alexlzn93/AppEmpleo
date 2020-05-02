@@ -8,13 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@Table(name="vacantes")
 public class Vacante {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String nombre;
 	private String descripcion;
@@ -26,7 +27,7 @@ public class Vacante {
 	private String status;
 	private String detalles;
 	@ManyToOne
-	@JoinColumn(name = "idcategoria", insertable = true, updatable = true)
+	@JoinColumn(name="idcategoria")
 	private Categoria categoria;
 
 	public Vacante() {
