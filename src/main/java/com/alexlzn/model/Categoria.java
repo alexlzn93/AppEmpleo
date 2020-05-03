@@ -16,6 +16,7 @@ import javax.persistence.Table;
 @Table(name="categorias")
 public class Categoria {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idcategoria;
 	private String nombre;
 	private String descripcion;
