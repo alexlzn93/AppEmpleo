@@ -1,34 +1,43 @@
 package com.alexlzn.model;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 @Entity
 @Table(name="vacantes")
-public class Vacante {
+public class Vacante implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	private int id;
 	private String nombre;
+	@Lob
 	private String descripcion;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
 	private Date fecha;
 	private double salario;
 	private int destacado; // 1=destacada 0=no destacada
 	private String images = "no_image.jpg";
 	private String status;
+	@Lob
 	private String detalles;
 	@ManyToOne
 	@JoinColumn(name="idcategoria")
 	private Categoria categoria;
+	@OneToMany(mappedBy="vacante")
+	private List<Solicitud> solicitudes;
 
 	public Vacante() {
 		super();
@@ -114,12 +123,23 @@ public class Vacante {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+	
+
+	public List<Solicitud> getSolicitudes() {
+		return solicitudes;
+	}
+
+	public void setSolicitudes(List<Solicitud> solicitudes) {
+		this.solicitudes = solicitudes;
+	}
 
 	@Override
 	public String toString() {
 		return "Vacante [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", fecha=" + fecha
 				+ ", salario=" + salario + ", destacado=" + destacado + ", images=" + images + ", status=" + status
-				+ ", detalles=" + detalles + ", categoria=" + categoria + "]";
+				+ ", detalles=" + detalles + ", categoria=" + categoria + ", solicitudes=" + solicitudes + "]";
 	}
+
+	
 
 }
