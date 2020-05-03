@@ -35,7 +35,7 @@ public class CategoriasController {
 	public String saveCategoria( Categoria categoria,BindingResult result, RedirectAttributes attributes) {
 		if(result.hasErrors()) {
 			System.out.println("Ocurrio un error al introducir los datos del formulario");
-			return "vacantes/formVacante"; //si hay errores en el formulario devuelvo la vista 
+			return "vacantes/formCategorias"; //si hay errores en el formulario devuelvo la vista 
 		}
 		attributes.addFlashAttribute("mensaje", "Categoria guardada correctamente"); //atributo flash
 		categoriaService.guardar(categoria);
@@ -47,7 +47,8 @@ public class CategoriasController {
 	public String delete(@RequestParam("id") int idcategoria,Model model) {
 		model.addAttribute("id", idcategoria);
 		categoriaService.delete(idcategoria);
-		return "mensajeEliminado";
+		
+		return "redirect:/categorias/index";
 	}
 	
 	@GetMapping("/editar")
