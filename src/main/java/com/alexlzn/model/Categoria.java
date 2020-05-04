@@ -21,7 +21,7 @@ public class Categoria {
 	private String nombre;
 	private String descripcion;
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="idcategoria",insertable=false,updatable=false)
+	@JoinColumn(name="idcategoria",insertable=true,updatable=true)
 	private List<Vacante> vacantes;
 	
 	
