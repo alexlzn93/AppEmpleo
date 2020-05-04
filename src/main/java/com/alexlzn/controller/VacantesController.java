@@ -52,16 +52,17 @@ public class VacantesController {
 	}
 	@PostMapping("/save")
 	public String saveVacante(Vacante vacante,BindingResult result,RedirectAttributes attributes
-			,@RequestParam("archivoImagen") MultipartFile multipart) { //DATA BINDING
+			,@RequestParam("archivoImagen") MultipartFile multipart,Model model) { //DATA BINDING
 		
 		//ERRORES
 		if(result.hasErrors()) {
 			System.out.println("Ocurrio un error al introducir los datos del formulario");
+			model.addAttribute("categorias", categoriasService.findAllCategoria()); 
 			return "vacantes/formVacante"; //si hay errores en el formulario devuelvo la vista 
 		}
 		//SUBIDA DE ARCHIVOS
 		if(!multipart.isEmpty()) {
-			String ruta="C:/Users/34687/Documents/imagenesJobsApp/";
+			String ruta="C:/Users/34687/Desktop/Proyectos-GIT/AppEmpleo/src/main/resources/static/images";
 			String nombreImagen=UploadFile.saveFiles(multipart, ruta);
 			if(nombreImagen !=null) {
 				vacante.setImages(nombreImagen);
@@ -82,22 +83,16 @@ public class VacantesController {
 	}
 	
 	@GetMapping("/editar")
-	public String editar(@RequestParam("id") int idVacante,Model model,BindingResult result,Vacante vacante) {
-		if(result.hasErrors()) {
-			System.out.println("Ocurrio un error al introducir los datos del formulario");
-			return "vacantes/formVacante"; //si hay errores en el formulario devuelvo la vista 
-		}
-		model.addAttribute("id", idVacante);
-		model.addAttribute("categorias", categoriasService.findAllCategoria()); 
+	public String editar(@RequestParam("id") int idVacante,Model model,Vacante vacante) {
 		vacanteService.buscarPorId(idVacante);
-		
-		return "vacantes/formVacante";
+		 
+		return "redirect:/vacantes/create";
 	}
 
 	@GetMapping("/verDetalle/{id}")
 	public String verDetalle(Model model,@PathVariable("id") int idVacante) {
 		model.addAttribute("id", idVacante);
-		Vacante vacante=vacanteService.buscarPorId(idVacante); //me devuelve el objeto de una lista estatica
+		Vacante vacante=vacanteService.buscarPorId(idVacante); 
 		model.addAttribute("vacante", vacante);
 		System.out.println(idVacante);
 		return "vacantes/detalle";
