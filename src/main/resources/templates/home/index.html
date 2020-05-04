@@ -50,9 +50,9 @@
           	<img class="rounded mx-auto d-block" th:src="@{/images/{img} (img=${vacante.images})}" alt="Generic placeholder image" width="220" height="220">            
           </div>
           <div class="col-md-9">
-            <h2 th:text="${vacante.nombre}"></h2>
-            <h6 class="card-title" th:text="${vacante.categoria.nombre}"><strong>Categoría: </strong></h6>
-            <h6 class="card-title" th:text="${vacante.fecha}"><strong>Publicado: </strong></h6>                
+            <h4> <strong><span th:text="${vacante.nombre}"> </span></strong></h4>
+            <h6> <strong>Categoría: </strong> <span class="card-title" th:text="${vacante.categoria.nombre}"></span></h6>
+            <h6> <strong>Fecha publicación: </strong> <span class="card-title" th:text="${vacante.fecha}"></span></h6>
             <p th:text="${vacante.descripcion}"></p>
             <p><a class="btn btn-secondary" th:href="@{/vacantes/verDetalle/{id} (id=${vacante.id}) }" role="button">Ver Oferta &raquo;</a></p>            
           </div>
