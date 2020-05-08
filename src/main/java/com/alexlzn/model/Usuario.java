@@ -2,6 +2,8 @@ package com.alexlzn.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +14,7 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	private String email;
@@ -32,17 +35,17 @@ public class Usuario implements Serializable {
 	private List<Solicitud> solicitudes;
 
 	//bi-directional many-to-many association to Perfile
-	@ManyToMany
-	@JoinTable(
-		name="usuarioperfil"
-		, joinColumns={
-			@JoinColumn(name="idUsuario")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="idPerfil")
-			}
-		)
+	@ManyToMany(fetch = FetchType.EAGER) //me trae los perfiles que tiene el usuario 
+	@JoinTable(name="usuarioperfil",
+	joinColumns={@JoinColumn(name="idUsuario")}, inverseJoinColumns={@JoinColumn(name="idPerfil")})
 	private List<Perfil> perfiles;
+	
+	public void agregar(Perfil perfil) {
+		if(perfiles==null) {
+			perfiles= new ArrayList<Perfil>();
+		}
+		perfiles.add(perfil);
+	}
 
 	public Usuario() {
 	}
