@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +36,7 @@ public class CategoriasController {
 	public String saveCategoria( Categoria categoria,BindingResult result, RedirectAttributes attributes) {
 		if(result.hasErrors()) {
 			System.out.println("Ocurrio un error al introducir los datos del formulario");
-			return "vacantes/formCategorias"; //si hay errores en el formulario devuelvo la vista 
+			return "categorias/formCategorias"; //si hay errores en el formulario devuelvo la vista 
 		}
 		attributes.addFlashAttribute("mensaje", "Categoria guardada correctamente"); //atributo flash
 		categoriaService.guardar(categoria);
@@ -43,11 +44,11 @@ public class CategoriasController {
 		return "redirect:/categorias/index";
 	}
 	
-	@GetMapping("/delete")
-	public String delete(@RequestParam("id") int idcategoria,Model model) {
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable("id") int idcategoria,Model model) {
 		model.addAttribute("id", idcategoria);
 		categoriaService.delete(idcategoria);
-		
+		System.out.println("delete -->" + idcategoria);
 		return "redirect:/categorias/index";
 	}
 	
