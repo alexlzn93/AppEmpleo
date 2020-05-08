@@ -48,7 +48,7 @@
                   <td th:text="${categoria.descripcion}"></td>
                   <td>
                      <a th:href="@{/categorias/editar(id=${categoria.idcategoria})}" class="btn btn-outline-success">Editar</a>
-                    <a th:href="@{/categorias/delete(id=${categoria.idcategoria})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-outline-danger" title="Eliminar la categoria.">Eliminar<i class="fas fa-trash" aria-hidden="true"></i></a>
+                    <a th:href="@{/categorias/delete/{id} (id=${categoria.idcategoria})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-outline-danger" title="Eliminar la categoria.">Eliminar<i class="fas fa-trash" aria-hidden="true"></i></a>
                   </td>
                 </tr>
                
