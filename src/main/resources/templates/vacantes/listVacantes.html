@@ -14,6 +14,7 @@
     <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
     <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" >
+    <link th:href="@{/font/css/all.css}" rel="stylesheet">
   </head>
 
   <body>
@@ -54,8 +55,8 @@
 	   					<span class="badge  badge-danger"  th:unless="${vacante.destacado==1}">NO</span> <!-- unless: si no es 1 =NO -->
 	                  </td>
 	                  <td>
-	                    <a th:href="@{/vacantes/editar(id=${vacante.id})}" class="btn btn-outline-success">Editar</a>
-	                    <a th:href="@{/vacantes/delete(id=${vacante.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-outline-danger" title="Eliminar el registro.">Eliminar<i class="fas fa-trash" aria-hidden="true"></i></a>
+	                    <a th:href="@{/vacantes/editar(id=${vacante.id})}" class="btn btn-outline-success" title="Editar"><i class="far fa-edit"></i></a>
+	                    <a th:href="@{/vacantes/delete(id=${vacante.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash" aria-hidden="true"></i></a>
 	                    
 	                  </td>
                 </tr>

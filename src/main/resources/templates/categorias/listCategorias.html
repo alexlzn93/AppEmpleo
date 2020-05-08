@@ -14,6 +14,7 @@
     <!-- Custom styles for this template -->
     <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
     <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+  	<link th:href="@{/font/css/all.css}" rel="stylesheet">
   </head>
 
   <body>
@@ -47,8 +48,10 @@
                   <td th:text="${categoria.nombre}"></td>
                   <td th:text="${categoria.descripcion}"></td>
                   <td>
-                     <a th:href="@{/categorias/editar(id=${categoria.idcategoria})}" class="btn btn-outline-success">Editar</a>
-                    <a th:href="@{/categorias/delete/{id} (id=${categoria.idcategoria})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-outline-danger" title="Eliminar la categoria.">Eliminar<i class="fas fa-trash" aria-hidden="true"></i></a>
+                     <a th:href="@{/categorias/editar/{id} (id=${categoria.idcategoria})}" class="btn btn-outline-success" title="Editar la categoria."><i class="far fa-edit"></i></a>
+                     <a th:href="@{/categorias/delete/{id} (id=${categoria.idcategoria})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash" aria-hidden="true"></i></a>
+    				
+
                   </td>
                 </tr>
                
