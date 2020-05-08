@@ -52,10 +52,11 @@ public class CategoriasController {
 		return "redirect:/categorias/index";
 	}
 	
-	@GetMapping("/editar")
-	public String editar(@RequestParam("id") int idcategoria,Model model) {
-		model.addAttribute("id", idcategoria);
-		categoriaService.buscarPorId(idcategoria);
-		return "redirect:/categorias/create";
+	@GetMapping("/editar/{id}")
+	public String editar(@PathVariable("id") int idcategoria,Model model) {
+		Categoria categoria= categoriaService.buscarPorId(idcategoria);
+		model.addAttribute("categoria", categoria);
+		System.out.println("Categoria " + categoria.getNombre());
+		return "categorias/formCategorias";
 	}
 }
