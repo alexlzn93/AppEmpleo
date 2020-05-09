@@ -45,6 +45,11 @@ public class VacantesService implements IVacantesService {
 		return null;
 	}
 
+	@Override
+	public List<Vacante> vacantesDestacadas() {
+		return vacanteRepo.findByDestacadoAndStatus(1, "Aprobada");
+	}
+
 	
 
 }
