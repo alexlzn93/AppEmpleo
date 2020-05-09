@@ -62,7 +62,7 @@ public class VacantesController {
 		}
 		//SUBIDA DE ARCHIVOS
 		if(!multipart.isEmpty()) {
-			String ruta="C:/Users/34687/Desktop/Proyectos-GIT/AppEmpleo/src/main/resources/static/images/";
+			String ruta="C:/Users/34687/Desktop/Proyectos-GIT/AppEmpleo/src/main/resources/static/images";
 			String nombreImagen=UploadFile.saveFiles(multipart, ruta);
 			if(nombreImagen !=null) {
 				vacante.setImages(nombreImagen);
@@ -83,9 +83,10 @@ public class VacantesController {
 	}
 	
 	@GetMapping("/editar")
-	public String editar(@RequestParam("id") int idVacante,Model model,Vacante vacante) {
-		vacanteService.buscarPorId(idVacante);
-		 
+	public String editar(@RequestParam("id") int idVacante,Model model) {
+		Vacante vacante= vacanteService.buscarPorId(idVacante);
+		model.addAttribute("categorias", categoriasService.findAllCategoria()); 
+		model.addAttribute("vacante", vacante);
 		return "vacantes/formVacante";
 	}
 
