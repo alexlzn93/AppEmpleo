@@ -19,13 +19,14 @@ public class HomeController {
 	IVacantesService vacanteService;
 	@Autowired
 	ICategoriaService categoriasService;
+	
 	@GetMapping("/")
-	public String goHome(Model model,Vacante vacante) {
+	public String goHome(Model model) {
 		//PAGINA PRINCIPAL
-		List<Vacante> listVacantes= vacanteService.findAllVacantes();
+		List<Vacante> listVacantes= vacanteService.vacantesDestacadas();
 		model.addAttribute("categorias", categoriasService.findAllCategoria());//lista de categorias en el index
 		model.addAttribute("vacantes", listVacantes);
-		model.addAttribute("mensaje", "Seleccione una categoría");
+		
 		return "home/index"; //home es la carpeta donde estaran html del controlador HomeController
 	}
 
