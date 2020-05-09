@@ -41,7 +41,7 @@
                 
                 <div class="card bg-light mb-3" >
                   <div class="card-body">
-                    <h5 class="card-title" th:text="${vacante.descripcion}">Detalles de la oferta de trabajo</h5>
+                    <h5 class="card-title" th:utext="${vacante.detalles}"></h5> <!-- utext para que thymeleaf respete etiquetas html -->
                     <p class="card-text"></p>
                   </div>
                 </div>   
