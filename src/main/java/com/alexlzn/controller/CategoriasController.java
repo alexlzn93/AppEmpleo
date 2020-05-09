@@ -33,14 +33,15 @@ public class CategoriasController {
 		return "categorias/formCategorias";
 	}
 	@PostMapping("/save")
-	public String saveCategoria( Categoria categoria,BindingResult result, RedirectAttributes attributes) {
+	public String saveCategoria(@RequestParam("idcategoria") int idcategoria, Categoria categoria,BindingResult result, RedirectAttributes attributes) {
 		if(result.hasErrors()) {
 			System.out.println("Ocurrio un error al introducir los datos del formulario");
 			return "categorias/formCategorias"; //si hay errores en el formulario devuelvo la vista 
 		}
 		attributes.addFlashAttribute("mensaje", "Categoria guardada correctamente"); //atributo flash
+		System.out.println("ID->"+categoria.getIdcategoria());
 		categoriaService.guardar(categoria);
-	
+		
 		return "redirect:/categorias/index";
 	}
 	
@@ -55,6 +56,7 @@ public class CategoriasController {
 	@GetMapping("/editar/{id}")
 	public String editar(@PathVariable("id") int idcategoria,Model model) {
 		Categoria categoria= categoriaService.buscarPorId(idcategoria);
+		//categoriaService.actualizar(categoria);
 		model.addAttribute("categoria", categoria);
 		System.out.println("Categoria " + categoria.getNombre());
 		return "categorias/formCategorias";
