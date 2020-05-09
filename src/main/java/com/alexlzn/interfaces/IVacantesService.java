@@ -10,8 +10,5 @@ public interface IVacantesService {
 	public void guardar (Vacante vacante);
 	public void delete (int idVacante);
 	public Vacante buscarPorId( int idVacante);
-	
-	public Vacante findPorId( int idVacante); //buscara en ListaVacantes (NO BASE DE DATOS)
-	public List<Vacante> listVacantes(); //este metodo es sin JPA (NO BASE DE DATOS)
-	public void guardarEnListaVacantes(Vacante vacantes);
+	public List<Vacante> vacantesDestacadas();
 }
