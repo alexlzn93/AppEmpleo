@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +31,8 @@ import com.alexlzn.util.UploadFile;
 @Controller
 @RequestMapping("/vacantes")
 public class VacantesController {
-	
+	@Value("${jobsapp.ruta.imagenes}")
+	private String rutaImagenes; //ruta donde estan las imagenes
 	@Autowired
 	IVacantesService vacanteService;
 	@Autowired
@@ -51,7 +53,7 @@ public class VacantesController {
 		return "vacantes/formVacante";
 	}
 	@PostMapping("/save")
-	public String saveVacante(Vacante vacante,BindingResult result,RedirectAttributes attributes
+	public String saveVacante(@RequestParam("id") int idVacante,Vacante vacante,BindingResult result,RedirectAttributes attributes
 			,@RequestParam("archivoImagen") MultipartFile multipart,Model model) { //DATA BINDING
 		
 		//ERRORES
@@ -62,14 +64,14 @@ public class VacantesController {
 		}
 		//SUBIDA DE ARCHIVOS
 		if(!multipart.isEmpty()) {
-			String ruta="C:/Users/34687/Desktop/Proyectos-GIT/AppEmpleo/src/main/resources/static/images";
+			String ruta="c:/jobsapp/imagenes/";
 			String nombreImagen=UploadFile.saveFiles(multipart, ruta);
 			if(nombreImagen !=null) {
 				vacante.setImages(nombreImagen);
 			}
 		}
 		
-		attributes.addFlashAttribute("mensaje", "Vacante guardada correctamente"); //atributo flash
+		attributes.addFlashAttribute("mensaje", "Vacante guardada correctamente"); //atributo flash en index
 		vacanteService.guardar(vacante);
 		System.out.println(vacante);
 		return "redirect:/vacantes/index"; //redirect al metodo index.
