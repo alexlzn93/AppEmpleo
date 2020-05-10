@@ -4,18 +4,21 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.alexlzn.interfaces.IVacantesService;
 import com.alexlzn.model.Vacante;
 import com.alexlzn.repository.IVacanteRepository;
+import com.alexlzn.repository.IVacanteRepositoryJPA;
 
 @Service
 public class VacantesService implements IVacantesService {
 	
 	@Autowired //inyeccion del repository 
 	IVacanteRepository vacanteRepo;
-	
+	@Autowired //inyeccion del repository 
+	IVacanteRepositoryJPA vacanteRepoJPA;
 	@Override
 	public List<Vacante> findAllVacantes() {
 		System.out.println("Lista de todas las vacantes");
@@ -48,6 +51,12 @@ public class VacantesService implements IVacantesService {
 	@Override
 	public List<Vacante> vacantesDestacadas() {
 		return vacanteRepo.findByDestacadoAndStatus(1, "Aprobada");
+	}
+
+	@Override
+	public List<Vacante> findByExample(Example<Vacante> example) {
+		
+		return vacanteRepoJPA.findAll(example);
 	}
 
 	
