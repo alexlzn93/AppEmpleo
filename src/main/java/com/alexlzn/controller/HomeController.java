@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -37,8 +39,10 @@ public class HomeController {
 	
 	@PostMapping("/searchVacante")
 	public String busquedaVacantes(@ModelAttribute("buscarVacante")Vacante vacante, Model model) {
-		System.out.println("buscado vacante" + vacante);
-		
+		System.out.println("Buscando vacante" + vacante);
+		Example<Vacante> example= Example.of(vacante);
+		List<Vacante> lista= vacanteService.findByExample(example);
+		model.addAttribute("vacantes", lista);
 		
 		return "home/index";
 	}
@@ -47,6 +51,7 @@ public class HomeController {
 	@ModelAttribute
 	public void recursosComunes(Model model) {
 		Vacante vacanteSearch = new Vacante();
+		vacanteSearch.resetImages();//PONGO LA IMAGEN A NULL CON ESE METODO
 		model.addAttribute("vacantes", vacanteService.vacantesDestacadas()); 
 		model.addAttribute("categorias", categoriasService.findAllCategoria());
 		model.addAttribute("buscarVacante", vacanteSearch);
@@ -55,6 +60,9 @@ public class HomeController {
 	public void errorStringDate(WebDataBinder wdb) {
 		SimpleDateFormat dateformat= new SimpleDateFormat("dd-MM-YYYY");
 		wdb.registerCustomEditor(Date.class, new CustomDateEditor(dateformat, false));
+		//SETTEA LOS STRING A NULOS EN EL DATA BINDING 
+		wdb.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+		
 	}
 	
 }
