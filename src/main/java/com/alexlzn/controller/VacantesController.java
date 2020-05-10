@@ -71,16 +71,17 @@ public class VacantesController {
 			}
 		}
 		
-		attributes.addFlashAttribute("mensaje", "Vacante guardada correctamente"); //atributo flash en index
+		attributes.addFlashAttribute("mensaje", "Oferta guardada correctamente"); //atributo flash en listVacantes
 		vacanteService.guardar(vacante);
 		System.out.println(vacante);
 		return "redirect:/vacantes/index"; //redirect al metodo index.
 	}
 	
 	@GetMapping("/delete")
-	public String delete(@RequestParam("id") int idVacante,Model model) {
-		model.addAttribute("id", idVacante);
+	public String delete(@RequestParam("id") int idVacante,Model model, RedirectAttributes attribute) {
+		System.out.println("Eliminada la vacante :" + idVacante);
 		vacanteService.delete(idVacante);
+		attribute.addAttribute("mensaje", "La oferta fue eliminada");
 		return "redirect:/vacantes/index";
 	}
 	
