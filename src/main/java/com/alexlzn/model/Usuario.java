@@ -15,14 +15,16 @@ public class Usuario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
 	private int id;
 
 	private String email;
 
-	private int estatus;
-
+	private int estatus; //1=DESBLOQUEADO 0=BLOQUEADO
+	
 	@Temporal(TemporalType.DATE)
-	private Date fechaRegistro;
+	@Column(name="fecha_alta")
+	private Date fecha_alta;
 
 	private String nombre;
 
@@ -37,7 +39,7 @@ public class Usuario implements Serializable {
 	//bi-directional many-to-many association to Perfile
 	@ManyToMany(fetch = FetchType.EAGER) //me trae los perfiles que tiene el usuario 
 	@JoinTable(name="usuarioperfil",
-	joinColumns={@JoinColumn(name="idUsuario")}, inverseJoinColumns={@JoinColumn(name="idPerfil")})
+	joinColumns={@JoinColumn(name="idusuario")}, inverseJoinColumns={@JoinColumn(name="idperfil")})
 	private List<Perfil> perfiles;
 	
 	public void agregar(Perfil perfil) {
@@ -74,12 +76,12 @@ public class Usuario implements Serializable {
 		this.estatus = estatus;
 	}
 
-	public Date getFechaRegistro() {
-		return this.fechaRegistro;
+	public Date getFecha_alta() {
+		return fecha_alta;
 	}
 
-	public void setFechaRegistro(Date fechaRegistro) {
-		this.fechaRegistro = fechaRegistro;
+	public void setFecha_alta(Date fecha_alta) {
+		this.fecha_alta = fecha_alta;
 	}
 
 	public String getNombre() {
@@ -135,5 +137,15 @@ public class Usuario implements Serializable {
 	public void setPerfiles(List<Perfil> perfiles) {
 		this.perfiles = perfiles;
 	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", email=" + email + ", estatus=" + estatus + ", fecha_alta=" + fecha_alta
+				+ ", nombre=" + nombre + ", password=" + password + ", username=" + username + ", solicitudes="
+				+ solicitudes + ", perfiles=" + perfiles + "]";
+	}
+
+	
+	
 
 }
