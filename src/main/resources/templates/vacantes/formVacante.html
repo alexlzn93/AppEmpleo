@@ -14,6 +14,7 @@
     <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
     <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" >
+    <link th:href="@{/font/css/all.css}" rel="stylesheet">
   </head>
 
   <body>
@@ -40,6 +41,7 @@
                 <div class="col-md-3"> 
                   <div class="form-group">
                   	<input type="hidden" id="id" name="id" th:field="*{id}">
+                  	<input type="hidden" id="images" name="images" th:field="*{images}">
                     <label for="nombre">Nombre</label>
                     <input type="text" class="form-control" th:field="*{nombre}" id="nombre" name="nombre" placeholder="Titulo de la oferta de trabajo" required="required">
                   </div>
@@ -116,7 +118,7 @@
                 </div> 
                 <div class="col-md-3">
                   <label for="imagen">Imagen/Logo</label>
-                  <img class="rounded mx-auto d-block" th:src="@{/images/construccion-logo.png}" alt="Generic placeholder image" width="200" height="200">            
+                  <img class="rounded mx-auto d-block" th:src="@{/logotipos/{img} (img=${vacante.images})}" alt="Generic placeholder image" width="200" height="200">            
                 </div>
               </div> 
               <button type="submit" class="btn btn-primary">Guardar</button>  
