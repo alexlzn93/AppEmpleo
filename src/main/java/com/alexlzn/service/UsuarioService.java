@@ -1,6 +1,7 @@
 package com.alexlzn.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,23 +18,29 @@ public class UsuarioService implements IUsuarioService {
 	@Override
 	public void guardar(Usuario usuario) {
 		usuarioRepo.save(usuario);
-
+		System.out.println("Guardando usuario: " + usuario.getNombre());
 	}
 
 	@Override
 	public void delete(int idusuario) {
 		usuarioRepo.deleteById(idusuario);
+		System.out.println("Eliminando usuario con id "+ idusuario);
 	}
 
 	@Override
 	public List<Usuario> findAllUsuarios() {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Lista de todos los usuarios");
+		return (List<Usuario>) usuarioRepo.findAll();
 	}
 
 	@Override
 	public Usuario buscarPorId(int idusuario) {
-		// TODO Auto-generated method stub
+		System.out.println("Buscando usuario con id " + idusuario);
+		Optional<Usuario>user= usuarioRepo.findById(idusuario);
+		if(user.isPresent()) {
+			user.get();
+		}
+		System.out.println("No se ha encontrado el usuario con id: " +idusuario);
 		return null;
 	}
 
