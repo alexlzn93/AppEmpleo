@@ -42,27 +42,25 @@ public class VacantesController {
 	public String index(Model model, Vacante vacante) {
 		//LISTA EN UNA TABLE TODAS LAS VACANTES DE LA LISTA
 		model.addAttribute("list_vacantes", vacanteService.findAllVacantes());
-		//model.addAttribute("categorias", categoriasService.findAllCategoria());
 		return "vacantes/listVacantes";
 	}
 	@GetMapping("/create")
 	public String nuevaVacante(Vacante vacante,Model model) { //th:object="${vacante}" DATA BINDING form con Beans
 		//FORMULARIO PARA CREAR UNA VACANTE NUEVA
 		//desplegar en el option la lista de las categorias
-		model.addAttribute("categorias", categoriasService.findAllCategoria()); 
+		//model.addAttribute("categorias", categoriasService.findAllCategoria()); 
 		return "vacantes/formVacante";
 	}
 	@PostMapping("/save")
-	public String saveVacante(@RequestParam("id") int idVacante,Vacante vacante,BindingResult result,RedirectAttributes attributes
+	public String saveVacante(Vacante vacante,BindingResult result,RedirectAttributes attributes
 			,@RequestParam("archivoImagen") MultipartFile multipart,Model model) { //DATA BINDING
 		
 		//ERRORES
 		if(result.hasErrors()) {
 			System.out.println("Ocurrio un error al introducir los datos del formulario");
-			model.addAttribute("categorias", categoriasService.findAllCategoria()); 
 			return "vacantes/formVacante"; //si hay errores en el formulario devuelvo la vista 
 		}
-		//SUBIDA DE ARCHIVOS
+		//SUBIDA DE IMAGENES
 		if(!multipart.isEmpty()) {
 			String ruta="c:/jobsapp/imagenes/";
 			String nombreImagen=UploadFile.saveFiles(multipart, ruta);
@@ -88,7 +86,7 @@ public class VacantesController {
 	@GetMapping("/editar")
 	public String editar(@RequestParam("id") int idVacante,Model model) {
 		Vacante vacante= vacanteService.buscarPorId(idVacante);
-		model.addAttribute("categorias", categoriasService.findAllCategoria()); 
+		//model.addAttribute("categorias", categoriasService.findAllCategoria()); 
 		model.addAttribute("vacante", vacante);
 		return "vacantes/formVacante";
 	}
@@ -108,6 +106,10 @@ public class VacantesController {
 		SimpleDateFormat dateformat= new SimpleDateFormat("dd-MM-YYYY");
 		wdb.registerCustomEditor(Date.class, new CustomDateEditor(dateformat, false));
 	}
-	
+	//DATOS QUE SON COMUNES O SE UTILIZAN EN VARIOS METODOS
+	@ModelAttribute
+	public void findAllCategorias(Model model) {
+		model.addAttribute("categorias", categoriasService.findAllCategoria());
+	}
 	
 }
