@@ -17,29 +17,30 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.data.annotation.Transient;
+
 @Entity
-@Table(name="vacantes")
+@Table(name = "vacantes")
 public class Vacante implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private String nombre;
 	@Lob
 	private String descripcion;
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
-	private double salario;
-	private int destacado; // 1=destacada 0=no destacada
+	private Double salario;
+	private Integer destacado; // 1=destacada 0=no destacada
 	private String images = "no_image.jpg";
 	private String status;
 	@Lob
 	private String detalles;
 	@ManyToOne
-	@JoinColumn(name="idcategoria")
+	@JoinColumn(name = "idcategoria")
 	private Categoria categoria;
-	@OneToMany(mappedBy="vacante")
+	@OneToMany(mappedBy = "vacante")
 	private List<Solicitud> solicitudes;
 
 	public Vacante() {
@@ -47,11 +48,11 @@ public class Vacante implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -79,19 +80,19 @@ public class Vacante implements Serializable {
 		this.fecha = fecha;
 	}
 
-	public double getSalario() {
+	public Double getSalario() {
 		return salario;
 	}
 
-	public void setSalario(double salario) {
+	public void setSalario(Double salario) {
 		this.salario = salario;
 	}
 
-	public int getDestacado() {
+	public Integer getDestacado() {
 		return destacado;
 	}
 
-	public void setDestacado(int destacado) {
+	public void setDestacado(Integer destacado) {
 		this.destacado = destacado;
 	}
 
@@ -126,7 +127,6 @@ public class Vacante implements Serializable {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	
 
 	public List<Solicitud> getSolicitudes() {
 		return solicitudes;
@@ -136,13 +136,15 @@ public class Vacante implements Serializable {
 		this.solicitudes = solicitudes;
 	}
 
+	public void resetImages() {
+		this.images = null;
+	}
+
 	@Override
 	public String toString() {
 		return "Vacante [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", fecha=" + fecha
 				+ ", salario=" + salario + ", destacado=" + destacado + ", images=" + images + ", status=" + status
 				+ ", detalles=" + detalles + ", categoria=" + categoria + ", solicitudes=" + solicitudes + "]";
 	}
-
-	
 
 }
