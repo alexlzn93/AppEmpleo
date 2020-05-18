@@ -7,7 +7,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -30,24 +33,11 @@ public class HomeController {
 	@GetMapping("/")
 	public String goHome(Model model) {
 		//PAGINA PRINCIPAL
-		List<Vacante> listVacantes= vacanteService.vacantesDestacadas(); //SOLO SE MUESTRAN LAS OFERTAS DESTACADAS Y APROBADAS
+		/*List<Vacante> listVacantes= vacanteService.vacantesDestacadas(); //SOLO SE MUESTRAN LAS OFERTAS DESTACADAS Y APROBADAS
 		model.addAttribute("categorias", categoriasService.findAllCategoria());//lista de categorias en el index
-		model.addAttribute("vacantes", listVacantes);
-		
+		model.addAttribute("vacantes", listVacantes);*/
 		return "home/index"; 
 	}
-	
-	@PostMapping("/searchVacante")
-	public String busquedaVacantes(@ModelAttribute("buscarVacante")Vacante vacante, Model model) {
-		System.out.println("Buscando vacante" + vacante);
-		Example<Vacante> example= Example.of(vacante);
-		List<Vacante> lista= vacanteService.findByExample(example);
-		model.addAttribute("vacantes", lista);
-		
-		return "home/index";
-	}
-
-	
 	@ModelAttribute
 	public void recursosComunes(Model model) {
 		Vacante vacanteSearch = new Vacante();
@@ -55,6 +45,7 @@ public class HomeController {
 		model.addAttribute("vacantes", vacanteService.vacantesDestacadas()); 
 		model.addAttribute("categorias", categoriasService.findAllCategoria());
 		model.addAttribute("buscarVacante", vacanteSearch);
+		
 	}
 	@InitBinder
 	public void errorStringDate(WebDataBinder wdb) {
