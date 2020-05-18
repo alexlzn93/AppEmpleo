@@ -26,13 +26,13 @@ public class SolicitudService implements ISolicitudService {
 		
 	}
 	@Override
-	public void eliminar(int idSolicitud) {
+	public void eliminar(Integer idSolicitud) {
 		Solicitud solicitud= new Solicitud();
 		System.out.println("Eliminando solicitud " + "ID: " + idSolicitud  );
 		solicitudRepo.deleteById(idSolicitud);
 	}
 	@Override
-	public Solicitud buscarPorId(int idSolicitud) {
+	public Solicitud buscarPorId(Integer idSolicitud) {
 		Optional<Solicitud> solicitud=solicitudRepo.findById(idSolicitud);
 		if(solicitud.isPresent())
 			return solicitud.get();

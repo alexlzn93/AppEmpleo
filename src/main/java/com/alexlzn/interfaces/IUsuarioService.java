@@ -7,7 +7,7 @@ import com.alexlzn.model.Usuario;
 public interface IUsuarioService {
 
 	public void guardar(Usuario usuario);
-	public void delete(int idusuario);
+	public void delete(Integer idusuario);
 	public List<Usuario> findAllUsuarios();
-	public Usuario buscarPorId(int idusuario);
+	public Usuario buscarPorId(Integer idusuario);
 }

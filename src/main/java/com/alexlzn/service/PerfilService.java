@@ -30,7 +30,7 @@ public class PerfilService implements IPerfilService {
 	}
 
 	@Override
-	public void eliminar(int idperfil) {
+	public void eliminar(Integer idperfil) {
 		System.out.println("Eliminando perfil " + idperfil);
 		perfilrepository.deleteById(idperfil);
 
@@ -43,7 +43,7 @@ public class PerfilService implements IPerfilService {
 	}
 
 	@Override
-	public Perfil buscarPorId(int idperfil) {
+	public Perfil buscarPorId(Integer idperfil) {
 		Optional<Perfil> perfil=perfilrepository.findById(idperfil);
 		if(perfil.isPresent()) {
 			return perfil.get();

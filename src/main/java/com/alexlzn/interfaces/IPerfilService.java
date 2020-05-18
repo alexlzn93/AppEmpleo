@@ -7,8 +7,8 @@ import com.alexlzn.model.Perfil;
 public interface IPerfilService {
 
 	public void guardar(Perfil perfil);
-	public void eliminar( int idperfil);
+	public void eliminar( Integer idperfil);
 	public List<Perfil> findAllPerfiles();
-	public Perfil buscarPorId(int idperfil);
+	public Perfil buscarPorId(Integer idperfil);
 	public void crearPerfiles();
 }

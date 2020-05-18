@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.alexlzn.interfaces.ICategoriaService;
 import com.alexlzn.model.Categoria;
 import com.alexlzn.repository.ICategoriaRepository;
+
 @Service
 public class CategoriasService implements ICategoriaService {
 
@@ -20,9 +21,9 @@ public class CategoriasService implements ICategoriaService {
 		System.out.println("Guardando categoria");
 		categoriaRepo.save(categoria);
 	}
-
+	
 	@Override
-	public void delete(int idcategoria) {
+	public void delete(Integer idcategoria) {
 		System.out.println("Eliminando categoria");
 		categoriaRepo.deleteById(idcategoria);
 
@@ -32,10 +33,11 @@ public class CategoriasService implements ICategoriaService {
 	public List<Categoria> findAllCategoria() {
 		System.out.println("Listado de Categorias");
 		return (List<Categoria>) categoriaRepo.findAll();
+		
 	}
 
 	@Override
-	public Categoria buscarPorId(int idcategoria) {
+	public Categoria buscarPorId(Integer idcategoria) {
 		Optional<Categoria> categoria=categoriaRepo.findById(idcategoria);
 		if(categoria.isPresent()) {
 			return categoria.get();
@@ -43,5 +45,7 @@ public class CategoriasService implements ICategoriaService {
 		System.out.println("No se encuentra la categoria con ID: " + idcategoria);
 		return null;
 	}
+
+	
 
 }

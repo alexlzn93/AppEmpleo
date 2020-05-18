@@ -7,7 +7,7 @@ import com.alexlzn.model.Categoria;
 public interface ICategoriaService {
 
 	public void guardar(Categoria categoria);
-	public void delete(int idcategoria); 
+	public void delete(Integer idcategoria); 
 	public List<Categoria> findAllCategoria(); //buscar todas Categoria
-	public Categoria buscarPorId(int idcategoria);
+	public Categoria buscarPorId(Integer idcategoria);
 }

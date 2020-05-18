@@ -22,7 +22,7 @@ public class UsuarioService implements IUsuarioService {
 	}
 
 	@Override
-	public void delete(int idusuario) {
+	public void delete(Integer idusuario) {
 		usuarioRepo.deleteById(idusuario);
 		System.out.println("Eliminando usuario con id "+ idusuario);
 	}
@@ -34,7 +34,7 @@ public class UsuarioService implements IUsuarioService {
 	}
 
 	@Override
-	public Usuario buscarPorId(int idusuario) {
+	public Usuario buscarPorId(Integer idusuario) {
 		System.out.println("Buscando usuario con id " + idusuario);
 		Optional<Usuario>user= usuarioRepo.findById(idusuario);
 		if(user.isPresent()) {
