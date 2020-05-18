@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class Categoria {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idcategoria;
+	private Integer idcategoria;
 	private String nombre;
 	private String descripcion;
 	@OneToMany(cascade=CascadeType.ALL)
@@ -29,8 +29,38 @@ public class Categoria {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
+
+	public Integer getIdcategoria() {
+		return idcategoria;
+	}
+
+
+	public void setIdcategoria(Integer idcategoria) {
+		this.idcategoria = idcategoria;
+	}
+
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+
 	public List<Vacante> getVacantes() {
 		return vacantes;
 	}
@@ -41,29 +71,14 @@ public class Categoria {
 	}
 
 
-	public int getIdcategoria() {
-		return idcategoria;
-	}
-	public void setIdcategoria(int idcategoria) {
-		this.idcategoria = idcategoria;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
 	@Override
 	public String toString() {
-		return "Categoria [idcategoria=" + idcategoria + ", nombre=" + nombre + ", descripcion=" + descripcion + "]";
+		return "Categoria [idcategoria=" + idcategoria + ", nombre=" + nombre + ", descripcion=" + descripcion
+				+ ", vacantes=" + vacantes + "]";
 	}
-
+	
+	
+	
 	
 
 }

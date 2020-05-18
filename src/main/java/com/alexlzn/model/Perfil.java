@@ -2,6 +2,9 @@ package com.alexlzn.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -11,14 +14,14 @@ import java.util.List;
  */
 @Entity
 @Table(name="perfiles")
-@NamedQuery(name="Perfil.findAll", query="SELECT p FROM Perfil p")
+
 public class Perfil implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private int id;
+	private Integer id;
 
 	private String perfil;
 
@@ -29,16 +32,16 @@ public class Perfil implements Serializable {
 	public Perfil() {
 	}
 
-	public int getId() {
-		return this.id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	public String getPerfil() {
-		return this.perfil;
+		return perfil;
 	}
 
 	public void setPerfil(String perfil) {
@@ -46,11 +49,18 @@ public class Perfil implements Serializable {
 	}
 
 	public List<Usuario> getUsuarios() {
-		return this.usuarios;
+		return usuarios;
 	}
 
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
 
+	@Override
+	public String toString() {
+		return "Perfil [id=" + id + ", perfil=" + perfil + ", usuarios=" + usuarios + "]";
+	}
+	
+
+	
 }

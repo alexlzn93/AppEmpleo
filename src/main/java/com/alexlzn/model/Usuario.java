@@ -9,18 +9,18 @@ import java.util.List;
 
 @Entity
 @Table(name="usuarios")
-@NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u")
+
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private int id;
+	private Integer id;
 
 	private String email;
 
-	private int estatus; //1=DESBLOQUEADO 0=BLOQUEADO
+	private Integer estatus; //1=DESBLOQUEADO 0=BLOQUEADO
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_alta")
@@ -37,6 +37,7 @@ public class Usuario implements Serializable {
 	private List<Solicitud> solicitudes;
 
 	//bi-directional many-to-many association to Perfile
+	
 	@ManyToMany(fetch = FetchType.EAGER) //me trae los perfiles que tiene el usuario 
 	@JoinTable(name="usuarioperfil",
 	joinColumns={@JoinColumn(name="idusuario")}, inverseJoinColumns={@JoinColumn(name="idperfil")})
@@ -51,28 +52,27 @@ public class Usuario implements Serializable {
 
 	public Usuario() {
 	}
-
-	public int getId() {
-		return this.id;
+		public Integer getId() {
+		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	public String getEmail() {
-		return this.email;
+		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public int getEstatus() {
-		return this.estatus;
+	public Integer getEstatus() {
+		return estatus;
 	}
 
-	public void setEstatus(int estatus) {
+	public void setEstatus(Integer estatus) {
 		this.estatus = estatus;
 	}
 
@@ -85,7 +85,7 @@ public class Usuario implements Serializable {
 	}
 
 	public String getNombre() {
-		return this.nombre;
+		return nombre;
 	}
 
 	public void setNombre(String nombre) {
@@ -93,7 +93,7 @@ public class Usuario implements Serializable {
 	}
 
 	public String getPassword() {
-		return this.password;
+		return password;
 	}
 
 	public void setPassword(String password) {
@@ -101,7 +101,7 @@ public class Usuario implements Serializable {
 	}
 
 	public String getUsername() {
-		return this.username;
+		return username;
 	}
 
 	public void setUsername(String username) {
@@ -109,11 +109,23 @@ public class Usuario implements Serializable {
 	}
 
 	public List<Solicitud> getSolicitudes() {
-		return this.solicitudes;
+		return solicitudes;
 	}
 
 	public void setSolicitudes(List<Solicitud> solicitudes) {
 		this.solicitudes = solicitudes;
+	}
+
+	public List<Perfil> getPerfiles() {
+		return perfiles;
+	}
+
+	public void setPerfiles(List<Perfil> perfiles) {
+		this.perfiles = perfiles;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public Solicitud addSolicitude(Solicitud solicitude) {
@@ -130,14 +142,6 @@ public class Usuario implements Serializable {
 		return solicitude;
 	}
 
-	public List<Perfil> getPerfiles() {
-		return this.perfiles;
-	}
-
-	public void setPerfiles(List<Perfil> perfiles) {
-		this.perfiles = perfiles;
-	}
-
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", email=" + email + ", estatus=" + estatus + ", fecha_alta=" + fecha_alta
@@ -146,6 +150,4 @@ public class Usuario implements Serializable {
 	}
 
 	
-	
-
 }

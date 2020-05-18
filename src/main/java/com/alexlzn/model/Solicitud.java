@@ -6,12 +6,12 @@ import java.util.Date;
 
 @Entity
 @Table(name="solicitudes")
-@NamedQuery(name="Solicitud.findAll", query="SELECT s FROM Solicitud s")
+
 public class Solicitud implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int id;
+	private Integer id;
 
 	private String archivo;
 
@@ -34,16 +34,16 @@ public class Solicitud implements Serializable {
 	public Solicitud() {
 	}
 
-	public int getId() {
-		return this.id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	public String getArchivo() {
-		return this.archivo;
+		return archivo;
 	}
 
 	public void setArchivo(String archivo) {
@@ -51,7 +51,7 @@ public class Solicitud implements Serializable {
 	}
 
 	public String getComentarios() {
-		return this.comentarios;
+		return comentarios;
 	}
 
 	public void setComentarios(String comentarios) {
@@ -59,7 +59,7 @@ public class Solicitud implements Serializable {
 	}
 
 	public Date getFecha() {
-		return this.fecha;
+		return fecha;
 	}
 
 	public void setFecha(Date fecha) {
@@ -67,7 +67,7 @@ public class Solicitud implements Serializable {
 	}
 
 	public Usuario getUsuario() {
-		return this.usuario;
+		return usuario;
 	}
 
 	public void setUsuario(Usuario usuario) {
@@ -75,11 +75,13 @@ public class Solicitud implements Serializable {
 	}
 
 	public Vacante getVacante() {
-		return this.vacante;
+		return vacante;
 	}
 
 	public void setVacante(Vacante vacante) {
 		this.vacante = vacante;
 	}
+	
 
+	
 }
