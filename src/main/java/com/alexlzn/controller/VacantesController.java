@@ -143,6 +143,7 @@ public class VacantesController {
 		Vacante vacanteSearch = new Vacante();
 		vacanteSearch.resetImages();//PONGO LA IMAGEN A NULL CON ESE METODO
 		model.addAttribute("vacantes", vacanteService.vacantesDestacadas());
+		//formulario del index para buscar una vacante por categoria o descripcion querybyExample
 		model.addAttribute("buscarVacante", vacanteSearch);
 	}
 	
