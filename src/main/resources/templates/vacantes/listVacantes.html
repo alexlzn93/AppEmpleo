@@ -55,7 +55,7 @@
 	   					<span class="badge  badge-danger"  th:unless="${vacante.destacado==1}">NO</span> <!-- unless: si no es 1 =NO -->
 	                  </td>
 	                  <td>
-	                    <a th:href="@{/vacantes/editar(id=${vacante.id})}" class="btn btn-outline-success" title="Editar"><i class="far fa-edit"></i></a>
+	                    <a th:href="@{/vacantes/editar(id=${vacante.id})}" class="btn btn-outline-success" title="Editar"><i class="far fa-edit" aria-hidden="true"></i></a>
 	                    <a th:href="@{/vacantes/delete(id=${vacante.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash" aria-hidden="true"></i></a>
 	                    
 	                  </td>
@@ -63,6 +63,12 @@
                
                </tbody>
             </table>
+            <nav th:if="${list_vacantes.totalPages>0}" aria-label="Page navigation example">
+            	<ul class="pagination">
+            	<li class="page-item"><a th:href="@{/vacantes/index(page=${list_vacantes.number-1})}" class="page-link">Anterior</a></li>
+            	<li class="page-item"><a th:href="@{/vacantes/index(page=${list_vacantes.number+1})}" class="page-link">Siguiente</a></li>
+            	</ul>
+            </nav>
             
           </div>
         </div>
