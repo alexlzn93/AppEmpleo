@@ -40,9 +40,10 @@
               <div class="row">
                 <div class="col-md-3"> 
                   <div class="form-group">
-                  	<input type="hidden" id="id" name="id" th:field="*{id}">
-                  	<input type="hidden" id="images" name="images" th:field="*{images}">
+                  	
                     <label for="nombre">Nombre</label>
+                    <input type="hidden" id="id" name="id" th:field="*{id}">
+                  	<input type="hidden" id="images" name="images" th:field="*{images}">
                     <input type="text" class="form-control" th:field="*{nombre}" id="nombre" name="nombre" placeholder="Titulo de la oferta de trabajo" required="required">
                   </div>
                 </div>
@@ -57,7 +58,7 @@
                 <div class="col-md-3"> 
                   <div class="form-group">
                     <label for="categoria">Categoría</label>
-                    <select class="form-control" th:field="*{categoria}" >
+                    <select class="form-control" th:field="*{categoria.idcategoria}" >
                       
                       <option th:each="categoria : ${categorias}" th:value="${categoria.idcategoria}" 
                       th:text="${categoria.nombre}">
