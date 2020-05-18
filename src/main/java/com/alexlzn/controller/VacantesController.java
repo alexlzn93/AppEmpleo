@@ -55,7 +55,7 @@ public class VacantesController {
 	}
 	
 	@GetMapping("/create")
-	public String nuevaVacante(Vacante vacante,Model model) { //th:object="${vacante}" DATA BINDING form con Beans
+	public String formVacante(Vacante vacante,Model model) { //th:object="${vacante}" DATA BINDING form con Beans
 		//FORMULARIO PARA CREAR UNA VACANTE NUEVA
 		//desplegar en el option la lista de las categorias
 		//model.addAttribute("categorias", categoriasService.findAllCategoria()); 
@@ -95,18 +95,12 @@ public class VacantesController {
 	
 	@GetMapping("/editar")
 	public String editar(@RequestParam("id") int idVacante,Model model) {
-		try {
+		
 			System.out.println("Editando vacante " + idVacante);
 			Vacante vacante= vacanteService.buscarPorId(idVacante);
 			//model.addAttribute("categorias", categoriasService.findAllCategoria()); 
 			model.addAttribute("vacante", vacante);
 			return "vacantes/formVacante";
-			
-		} catch (StackOverflowError e) {
-			System.out.println("ERROR");
-		}
-		return null;
-		
 	}
 
 	@GetMapping("/verDetalle/{id}")
@@ -144,7 +138,7 @@ public class VacantesController {
 	}
 	//DATOS QUE SON COMUNES O SE UTILIZAN EN VARIOS METODOS
 	@ModelAttribute
-	public void findAllCategorias(Model model) {
+	public void recursosComunes(Model model) {
 		model.addAttribute("categorias", categoriasService.findAllCategoria());
 		Vacante vacanteSearch = new Vacante();
 		vacanteSearch.resetImages();//PONGO LA IMAGEN A NULL CON ESE METODO
