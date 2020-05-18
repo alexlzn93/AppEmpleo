@@ -2,10 +2,15 @@ package com.alexlzn.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,12 +43,17 @@ public class VacantesController {
 	@Autowired
 	ICategoriaService categoriasService;
 	
+	/*
+	 * INDEX CON PAGINACION
+	 * 
+	 */
 	@GetMapping("/index")
-	public String index(Model model, Vacante vacante) {
+	public String index(Model model, Vacante vacante, Pageable page) {
 		//LISTA EN UNA TABLE TODAS LAS VACANTES DE LA LISTA
-		model.addAttribute("list_vacantes", vacanteService.findAllVacantes());
+		model.addAttribute("list_vacantes", vacanteService.findAllVacantesPaginacion(page));
 		return "vacantes/listVacantes";
 	}
+	
 	@GetMapping("/create")
 	public String nuevaVacante(Vacante vacante,Model model) { //th:object="${vacante}" DATA BINDING form con Beans
 		//FORMULARIO PARA CREAR UNA VACANTE NUEVA
@@ -85,10 +95,18 @@ public class VacantesController {
 	
 	@GetMapping("/editar")
 	public String editar(@RequestParam("id") int idVacante,Model model) {
-		Vacante vacante= vacanteService.buscarPorId(idVacante);
-		//model.addAttribute("categorias", categoriasService.findAllCategoria()); 
-		model.addAttribute("vacante", vacante);
-		return "vacantes/formVacante";
+		try {
+			System.out.println("Editando vacante " + idVacante);
+			Vacante vacante= vacanteService.buscarPorId(idVacante);
+			//model.addAttribute("categorias", categoriasService.findAllCategoria()); 
+			model.addAttribute("vacante", vacante);
+			return "vacantes/formVacante";
+			
+		} catch (StackOverflowError e) {
+			System.out.println("ERROR");
+		}
+		return null;
+		
 	}
 
 	@GetMapping("/verDetalle/{id}")
@@ -99,17 +117,39 @@ public class VacantesController {
 		System.out.println(idVacante);
 		return "vacantes/detalle";
 	}
+	/*
+	 * METODO PARA BUSCAR VACANTES POR DESCRIPCION Y POR CATEGORIAS
+	 * 
+	 */
+	@GetMapping("/buscarVacante")
+	public String busquedaVacantes(@ModelAttribute("buscarVacante")Vacante vacante, Model model) {
+		System.out.println("Buscando vacante" + vacante);
+		//where descripcion like '%?%' 
+		ExampleMatcher matcher= ExampleMatcher.matching()
+				.withMatcher("descripcion", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
+		Example<Vacante> example= Example.of(vacante, matcher);
+		List<Vacante> lista= vacanteService.findByExample(example);
+		
+		model.addAttribute("vacantes", lista);
+		return "home/index";
+	}
 	
 	//CORREGIR EL ERROR DE STRING A TIPO DATE
 	@InitBinder
 	public void errorStringDate(WebDataBinder wdb) {
 		SimpleDateFormat dateformat= new SimpleDateFormat("dd-MM-YYYY");
 		wdb.registerCustomEditor(Date.class, new CustomDateEditor(dateformat, false));
+		//SETTEA LOS STRING A NULOS EN EL DATA BINDING (images=null;)
+		wdb.registerCustomEditor(String.class, new StringTrimmerEditor(true));
 	}
 	//DATOS QUE SON COMUNES O SE UTILIZAN EN VARIOS METODOS
 	@ModelAttribute
 	public void findAllCategorias(Model model) {
 		model.addAttribute("categorias", categoriasService.findAllCategoria());
+		Vacante vacanteSearch = new Vacante();
+		vacanteSearch.resetImages();//PONGO LA IMAGEN A NULL CON ESE METODO
+		model.addAttribute("vacantes", vacanteService.vacantesDestacadas());
+		model.addAttribute("buscarVacante", vacanteSearch);
 	}
 	
 }
