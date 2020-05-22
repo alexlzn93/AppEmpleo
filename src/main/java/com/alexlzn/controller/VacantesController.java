@@ -118,6 +118,10 @@ public class VacantesController {
 	@GetMapping("/buscarVacante")
 	public String busquedaVacantes(@ModelAttribute("buscarVacante")Vacante vacante, Model model) {
 		System.out.println("Buscando vacante" + vacante);
+		/**
+		 * La busqueda solo seran de las Vacantes Aprobadas
+		 */
+		vacante.setStatus("Aprobada");
 		//where descripcion like '%?%' 
 		ExampleMatcher matcher= ExampleMatcher.matching()
 				.withMatcher("descripcion", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
