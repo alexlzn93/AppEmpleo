@@ -39,7 +39,7 @@ public class SolicitudesController {
 	//save
 	@PostMapping("/save")
 	public String saveVacante(Solicitud solicitud,BindingResult result,RedirectAttributes attributes
-			,@RequestParam("archivoImagen") MultipartFile multipart,Model model) { //DATA BINDING
+			,@RequestParam("archivoCV") MultipartFile multipart,Model model) { //DATA BINDING
 		
 		//ERRORES
 		if(result.hasErrors()) {
