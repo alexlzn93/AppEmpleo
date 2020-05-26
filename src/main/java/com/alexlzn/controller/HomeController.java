@@ -58,10 +58,14 @@ public class HomeController {
 		model.addAttribute("vacantes", listVacantes);*/
 		return "home/index"; 
 	}
-	@GetMapping("/index")
+	/**
+	 * Metodo para ingresar un usuario a la app
+	 * 
+	 */
+	@GetMapping("/index") 
 	public String mostrarIndex(Authentication authentication, HttpSession session) {		
 		
-		// Como el usuario ya ingreso, ya podemos agregar a la session el objeto usuario.
+		// Subo el usuario logueado a la session
 		String username = authentication.getName();	
 		System.out.println(username);
 		
@@ -78,11 +82,19 @@ public class HomeController {
 		
 		return "redirect:/";
 	}
+	/**
+	 * Metodo para mostrar la vista del formRegistro
+	 */
 	@GetMapping("/singup")
 	public String registroUsuario(Usuario usuario,Model model) { //th:object="${usuario}" DATA BINDING form con Beans
 		//FORMULARIO PARA CREAR UN USUARIO NUEVO
 		return "usuarios/formRegistro";
 	}
+	/**
+	 * metodo para dar de alta un usuario en la base de datos con password encriptada
+	 * @param usuario
+	 * 
+	 */
 	@PostMapping("/singup")
 	public String saveUsuario(Usuario usuario,BindingResult result,RedirectAttributes attributes,Model model) { //DATA BINDING
 
@@ -95,7 +107,7 @@ public class HomeController {
 		System.out.println(usuario.toString());
 		//CREAMOS EL PERFIL QUE LE ASIGNAREMOS A UN NUEVO USUARIO
 		Perfil perfil= new Perfil();
-		perfil.setId(3); //EL ID 3 ES EL USUARIO
+		perfil.setId(3); //EL ID=3 ES EL USUARIO
 		usuario.agregar(perfil);
 		
 		//GUARDAMOS EL USUARIO EN LA BASE DE DATOS
