@@ -86,7 +86,7 @@ public class VacantesController {
 	}
 	
 	@GetMapping("/delete")
-	public String delete(@RequestParam("id") int idVacante,Model model, RedirectAttributes attribute) {
+	public String delete(@RequestParam("id") Integer idVacante,Model model, RedirectAttributes attribute) {
 		System.out.println("Eliminada la vacante :" + idVacante);
 		vacanteService.delete(idVacante);
 		attribute.addAttribute("mensaje", "La oferta fue eliminada");
@@ -94,7 +94,7 @@ public class VacantesController {
 	}
 	
 	@GetMapping("/editar")
-	public String editar(@RequestParam("id") int idVacante,Model model) {
+	public String editar(@RequestParam("id") Integer idVacante,Model model) {
 		
 			System.out.println("Editando vacante " + idVacante);
 			Vacante vacante= vacanteService.buscarPorId(idVacante);
@@ -104,7 +104,7 @@ public class VacantesController {
 	}
 
 	@GetMapping("/verDetalle/{id}")
-	public String verDetalle(Model model,@PathVariable("id") int idVacante) {
+	public String verDetalle(Model model,@PathVariable("id") Integer idVacante) {
 		model.addAttribute("id", idVacante);
 		Vacante vacante=vacanteService.buscarPorId(idVacante); 
 		model.addAttribute("vacante", vacante);
