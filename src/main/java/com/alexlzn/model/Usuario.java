@@ -32,12 +32,8 @@ public class Usuario implements Serializable {
 
 	private String username;
 
-	//bi-directional many-to-one association to Solicitude
-	@OneToMany(mappedBy="usuario")
-	private List<Solicitud> solicitudes;
-
-	//bi-directional many-to-many association to Perfile
 	
+	//Relacion ManyToMany (Un usuario tiene muchos perfiles)
 	@ManyToMany(fetch = FetchType.EAGER) //me trae los perfiles que tiene el usuario 
 	@JoinTable(name="usuarioperfil",
 	joinColumns={@JoinColumn(name="idusuario")}, inverseJoinColumns={@JoinColumn(name="idperfil")})
@@ -108,13 +104,7 @@ public class Usuario implements Serializable {
 		this.username = username;
 	}
 
-	public List<Solicitud> getSolicitudes() {
-		return solicitudes;
-	}
-
-	public void setSolicitudes(List<Solicitud> solicitudes) {
-		this.solicitudes = solicitudes;
-	}
+	
 
 	public List<Perfil> getPerfiles() {
 		return perfiles;
@@ -128,26 +118,15 @@ public class Usuario implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Solicitud addSolicitude(Solicitud solicitude) {
-		getSolicitudes().add(solicitude);
-		solicitude.setUsuario(this);
-
-		return solicitude;
-	}
-
-	public Solicitud removeSolicitude(Solicitud solicitude) {
-		getSolicitudes().remove(solicitude);
-		solicitude.setUsuario(null);
-
-		return solicitude;
-	}
-
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", email=" + email + ", estatus=" + estatus + ", fecha_alta=" + fecha_alta
-				+ ", nombre=" + nombre + ", password=" + password + ", username=" + username + ", solicitudes="
-				+ solicitudes + ", perfiles=" + perfiles + "]";
+				+ ", nombre=" + nombre + ", password=" + password + ", username=" + username + ", perfiles=" + perfiles
+				+ "]";
 	}
+
+	
+
 
 	
 }
