@@ -1,0 +1,80 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" th:href="@{/images/logo.ico}">
+
+    <title>JobsApp | Lista de Solicitudes de Empleo.</title>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" >
+    <link th:href="@{/font/css/all.css}" rel="stylesheet">
+  </head>
+
+  <body>
+
+   
+    <header th:insert="fragments/header.html :: header">
+    </header>
+
+    <main role="main">     
+      <hr>
+      <div class="container"> 
+
+        <div class="card">
+          <h4 class="card-header"><strong>Listado de Solicitudes de Empleo</strong></h4>              
+          <div class="card-body">
+            <table class="table table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Categoría</th>
+                  <th scope="col">Vacante</th>
+                  <th scope="col">Nombre Candidato</th>
+                  <th scope="col">Recibida</th>
+                  <th scope="col">Operaciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="solicitud : ${solicitudes}">
+                  <td th:text="${solicitud.vacante.categoria.nombre}"></td>
+                  <td th:text="${solicitud.vacante.nombre}"></td>
+                  <td th:text="${solicitud.usuario.nombre}"></td>
+                  <td th:text="${solicitud.fecha}"></td>
+                  <td>
+                    <a th:href="@{/solicitud/editar/{id} (id=${solicitud.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                    <a th:href="@{/solicitud/delete/{id} (id=${solicitud.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
+                    <a href="#" class="btn btn-success btn-sm" role="button" title="Enviar correo electrónico al usuario."><i class="fas fa-envelope" aria-hidden="true"></i></a>
+                    <a href="#" class="btn btn-success btn-sm" role="button" title="Descargar Curriculm Vitae."><i class="fas fa-download" aria-hidden="true"></i></a>
+                  </td>
+                </tr>
+               
+                               
+              </tbody>
+            </table>
+            <nav th:if="${solicitudes.totalPages > 0}" aria-label="Page navigation example" >
+			  <ul class="pagination">         
+			    <li class="page-item"><a th:href="@{/solicitudes/index(page=${solicitudes.number - 1})}" class="page-link">Anterior</a></li>			    
+			    <li class="page-item"><a th:href="@{/solicitudes/index(page=${solicitudes.number + 1})}" class="page-link">Siguiente</a></li>
+			  </ul>
+			</nav>
+          </div>
+        </div>
+      </div> <!-- /container -->
+
+    </main>
+
+ <footer th:insert="fragments/footer.html:: footer" class="footer">
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>    
+  </body>
+</html>
