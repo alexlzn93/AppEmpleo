@@ -7,27 +7,22 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
-
 /**
  * The persistent class for the perfiles database table.
  * 
  */
 @Entity
-@Table(name="perfiles")
+@Table(name = "perfiles")
 
 public class Perfil implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private Integer id;
 
 	private String perfil;
-
-	//bi-directional many-to-many association to Usuario
-	@ManyToMany(mappedBy="perfiles")
-	private List<Usuario> usuarios;
 
 	public Perfil() {
 	}
@@ -48,19 +43,9 @@ public class Perfil implements Serializable {
 		this.perfil = perfil;
 	}
 
-	public List<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
-
 	@Override
 	public String toString() {
-		return "Perfil [id=" + id + ", perfil=" + perfil + ", usuarios=" + usuarios + "]";
+		return "Perfil [id=" + id + ", perfil=" + perfil + "]";
 	}
-	
-
 	
 }
