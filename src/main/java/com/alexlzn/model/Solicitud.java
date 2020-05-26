@@ -5,12 +5,13 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="solicitudes")
+@Table(name = "solicitudes")
 
 public class Solicitud implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment MySQL
 	private Integer id;
 
 	private String archivo;
@@ -21,14 +22,12 @@ public class Solicitud implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idUsuario")
+	@OneToOne
+	@JoinColumn(name = "id_usuario") // foreignKey en la tabla de usuarios
 	private Usuario usuario;
 
-	//bi-directional many-to-one association to Vacante
-	@ManyToOne
-	@JoinColumn(name="idVacante")
+	@OneToOne
+	@JoinColumn(name = "id_vacante") // foreignKey en la tabla de solicitudes
 	private Vacante vacante;
 
 	public Solicitud() {
@@ -81,7 +80,5 @@ public class Solicitud implements Serializable {
 	public void setVacante(Vacante vacante) {
 		this.vacante = vacante;
 	}
-	
 
-	
 }
