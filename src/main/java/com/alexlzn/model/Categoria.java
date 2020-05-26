@@ -11,74 +11,47 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="categorias")
+@Table(name = "categorias")
 public class Categoria {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idcategoria;
 	private String nombre;
 	private String descripcion;
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="idcategoria",insertable=true,updatable=true)
-	private List<Vacante> vacantes;
-	
-	
+
 	public Categoria() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public Integer getIdcategoria() {
 		return idcategoria;
 	}
-
 
 	public void setIdcategoria(Integer idcategoria) {
 		this.idcategoria = idcategoria;
 	}
 
-
 	public String getNombre() {
 		return nombre;
 	}
-
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-
 	public String getDescripcion() {
 		return descripcion;
 	}
-
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
-
-	public List<Vacante> getVacantes() {
-		return vacantes;
-	}
-
-
-	public void setVacantes(List<Vacante> vacantes) {
-		this.vacantes = vacantes;
-	}
-
-
 	@Override
 	public String toString() {
-		return "Categoria [idcategoria=" + idcategoria + ", nombre=" + nombre + ", descripcion=" + descripcion
-				+ ", vacantes=" + vacantes + "]";
+		return "Categoria [idcategoria=" + idcategoria + ", nombre=" + nombre + ", descripcion=" + descripcion + "]";
 	}
-	
-	
-	
-	
 
 }
