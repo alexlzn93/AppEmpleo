@@ -12,11 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.data.annotation.Transient;
+
 
 @Entity
 @Table(name = "vacantes")
@@ -37,12 +39,10 @@ public class Vacante implements Serializable {
 	private String status;
 	@Lob
 	private String detalles;
-	@ManyToOne
-	@JoinColumn(name = "idcategoria")
-	private Categoria categoria;
-	@OneToMany(mappedBy = "vacante")
-	private List<Solicitud> solicitudes;
-
+	@OneToOne
+	@JoinColumn(name = "idcategoria") // foreignKey en la tabla de Vacantes	
+	private Categoria categoria; // Categoria a la que pertence la oferta de trabajo
+	
 	public Vacante() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -128,13 +128,7 @@ public class Vacante implements Serializable {
 		this.categoria = categoria;
 	}
 
-	public List<Solicitud> getSolicitudes() {
-		return solicitudes;
-	}
-
-	public void setSolicitudes(List<Solicitud> solicitudes) {
-		this.solicitudes = solicitudes;
-	}
+	
 
 	public void resetImages() {
 		this.images = null;
@@ -144,7 +138,9 @@ public class Vacante implements Serializable {
 	public String toString() {
 		return "Vacante [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", fecha=" + fecha
 				+ ", salario=" + salario + ", destacado=" + destacado + ", images=" + images + ", status=" + status
-				+ ", detalles=" + detalles + ", categoria=" + categoria + ", solicitudes=" + solicitudes + "]";
+				+ ", detalles=" + detalles + ", categoria=" + categoria + "]";
 	}
+
+	
 
 }
