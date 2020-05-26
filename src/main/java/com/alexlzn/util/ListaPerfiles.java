@@ -8,7 +8,7 @@ import com.alexlzn.model.Perfil;
 public class ListaPerfiles {
 
 	public List<Perfil> listaPerfil(){
-		List<Perfil> lista= new ArrayList();
+		List<Perfil> lista= new ArrayList<Perfil>();
 		Perfil perfil1= new Perfil();
 		perfil1.setPerfil("ADMINISTRADOR");
 		Perfil perfil2= new Perfil();
