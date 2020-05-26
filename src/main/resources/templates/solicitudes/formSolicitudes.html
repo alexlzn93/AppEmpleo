@@ -27,22 +27,29 @@
       <hr>
       <div class="container"> 
         <div class="row"  >
-          <div class="col-md-3">            
-            <img class="rounded mx-auto d-block" th:src="@{/images/{img} (img=${vacante.images})}" alt="Generic placeholder image" width="220" height="220">            
+          <div class="col-md-3">
+         	<input type="hidden" id="images" name="images" th:field="*{solicitud.vacante.images}">          
+            <img class="rounded mx-auto d-block" th:src="@{/logotipos/{img} (img=${solicitud.vacante.images})}" alt="Generic placeholder image" width="220" height="220">            
           </div>
           <div class="col-md-9">
             <div class="card">
                
-              <h4 class="card-header" ><strong th:text="${vacante.nombre}"></strong></h4>             
+              <h4 class="card-header" ><strong th:text="${solicitud.vacante.nombre}"></strong></h4>             
               <div class="card-body">
                 
-                <h5 class="card-title"><strong >Categoría: </strong> <span th:text="${vacante.categoria.nombre}"></span></h5>
-                <h6 class="card-title"><strong>Publicado: </strong><span th:text="${vacante.fecha}"></span></h6>                
-                <h6 class="card-title"><strong>Salario Ofrecido: </strong><span  th:text="${vacante.salario}+' Euros'"></span></h6>
+                <h5 class="card-title"><strong >Categoría: </strong> <span th:text="${solicitud.vacante.categoria.nombre}"></span></h5>
+                <h6 class="card-title"><strong>Publicado: </strong><span th:text="${solicitud.vacante.fecha}"></span></h6>                
+                <h6 class="card-title"><strong>Salario Ofrecido: </strong><span  th:text="${solicitud.vacante.salario}+' Euros'"></span></h6>
               
-                <p class="card-text"  th:text="${vacante.descripcion}"></p>
+                <p class="card-text"  th:text="${solicitud.vacante.descripcion}"></p>
                 <hr>
                 <form th:action="@{/solicitud/save}" method="post" th:object="${solicitud}" enctype="multipart/form-data">                                                 
+                  <div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role='alert'>
+            		Por favor corrija los siguientes errores:
+	            	<ul>
+	            	<li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+	            	</ul>
+           		</div>  
                   <div class="row">
                     <div class="col-md-6"> 
                       <div class="form-group">
@@ -80,7 +87,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"></script>
-    <script th:src="@{bootstrap/js/bootstrap.min.js}"></script>     
+  	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>     
   </body>
 </html>
