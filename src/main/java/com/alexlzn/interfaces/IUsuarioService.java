@@ -10,4 +10,5 @@ public interface IUsuarioService {
 	public void delete(Integer idusuario);
 	public List<Usuario> findAllUsuarios();
 	public Usuario buscarPorId(Integer idusuario);
+	public Usuario findByUsername(String username);
 }

@@ -44,4 +44,10 @@ public class UsuarioService implements IUsuarioService {
 		return null;
 	}
 
+	@Override
+	public Usuario findByUsername(String username) {
+		System.out.println("USERNAME " + username);
+		return usuarioRepo.findByUsername(username);
+	}
+
 }

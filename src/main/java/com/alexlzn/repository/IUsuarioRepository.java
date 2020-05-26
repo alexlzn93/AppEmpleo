@@ -7,4 +7,5 @@ import com.alexlzn.model.Usuario;
 @Repository
 public interface IUsuarioRepository extends CrudRepository<Usuario, Integer> {
 
+	public Usuario findByUsername(String username);
 }
