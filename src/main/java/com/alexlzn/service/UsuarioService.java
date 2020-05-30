@@ -50,4 +50,28 @@ public class UsuarioService implements IUsuarioService {
 		return usuarioRepo.findByUsername(username);
 	}
 
+	@Override
+	public Usuario bloquearUsuario(Integer idUser) {
+		System.out.println("BLOQUEANDO USUARIO");
+		Optional<Usuario> user= usuarioRepo.findById(idUser);
+		if(user.isPresent()) {
+			user.get().setEstatus(0);
+			 return user.get();
+		}
+		System.out.println("NO FUNCIONA");
+		return null;
+	}
+
+	@Override
+	public Usuario desbloquearUsuario(Integer idUser) {
+		System.out.println("Desbloqueando usuario "+ idUser);
+		Optional<Usuario> user= usuarioRepo.findById(idUser);
+		if(user.isPresent()) {
+			user.get().setEstatus(1);
+			 return user.get();
+		}
+		System.out.println("NO FUNCIONA");
+		return null;
+	}
+
 }
