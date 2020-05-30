@@ -38,7 +38,7 @@ public class UsuarioService implements IUsuarioService {
 		System.out.println("Buscando usuario con id " + idusuario);
 		Optional<Usuario>user= usuarioRepo.findById(idusuario);
 		if(user.isPresent()) {
-			user.get();
+			return user.get();
 		}
 		System.out.println("No se ha encontrado el usuario con id: " +idusuario);
 		return null;
@@ -48,6 +48,31 @@ public class UsuarioService implements IUsuarioService {
 	public Usuario findByUsername(String username) {
 		System.out.println("USERNAME " + username);
 		return usuarioRepo.findByUsername(username);
+	}
+
+	@Override
+	public Usuario bloquearUsuario(Integer idUser) {
+		System.out.println("Bloqueando usuario "+ idUser);
+		Optional<Usuario> user= usuarioRepo.findById(idUser);
+		if(user.isPresent()) {
+			user.get().setEstatus(0);
+			 return user.get();
+		}
+		System.out.println("NO FUNCIONA");
+		return null;
+		
+	}
+	@Override
+	public Usuario desbloquearUsuario(Integer idUser) {
+		System.out.println("Desbloqueando usuario "+ idUser);
+		Optional<Usuario> user= usuarioRepo.findById(idUser);
+		if(user.isPresent()) {
+			user.get().setEstatus(1);
+			 return user.get();
+		}
+		System.out.println("NO FUNCIONA");
+		return null;
+		
 	}
 
 }
