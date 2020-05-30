@@ -11,4 +11,6 @@ public interface IUsuarioService {
 	public List<Usuario> findAllUsuarios();
 	public Usuario buscarPorId(Integer idusuario);
 	public Usuario findByUsername(String username);
+	public Usuario bloquearUsuario(Integer idUser);
+	public Usuario desbloquearUsuario(Integer idUser);
 }
