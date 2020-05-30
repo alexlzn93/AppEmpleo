@@ -8,22 +8,22 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="usuarios")
+@Table(name = "usuarios")
 
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private Integer id;
 
 	private String email;
 
-	private Integer estatus; //1=DESBLOQUEADO 0=BLOQUEADO
-	
+	private Integer estatus; // 1=DESBLOQUEADO 0=BLOQUEADO
+
 	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_alta")
+	@Column(name = "fecha_alta")
 	private Date fecha_alta;
 
 	private String nombre;
@@ -32,23 +32,26 @@ public class Usuario implements Serializable {
 
 	private String username;
 
-	
-	//Relacion ManyToMany (Un usuario tiene muchos perfiles)
-	@ManyToMany(fetch = FetchType.EAGER) //me trae los perfiles que tiene el usuario 
-	@JoinTable(name="usuarioperfil",
-	joinColumns={@JoinColumn(name="idusuario")}, inverseJoinColumns={@JoinColumn(name="idperfil")})
+	// Relacion ManyToMany (Un usuario tiene muchos perfiles)
+	@ManyToMany(fetch = FetchType.EAGER) // me trae los perfiles que tiene el usuario
+	@JoinTable(name = "usuarioperfil", joinColumns = { @JoinColumn(name = "idusuario") }, inverseJoinColumns = {
+			@JoinColumn(name = "idperfil") })
 	private List<Perfil> perfiles;
-	
+
 	public void agregar(Perfil perfil) {
-		if(perfiles==null) {
-			perfiles= new ArrayList<Perfil>();
+		if (perfiles == null) {
+			perfiles = new ArrayList<Perfil>();
 		}
 		perfiles.add(perfil);
+	}
+	public void estatusBloqueado() {
+		this.estatus=0;
 	}
 
 	public Usuario() {
 	}
-		public Integer getId() {
+
+	public Integer getId() {
 		return id;
 	}
 
@@ -104,8 +107,6 @@ public class Usuario implements Serializable {
 		this.username = username;
 	}
 
-	
-
 	public List<Perfil> getPerfiles() {
 		return perfiles;
 	}
@@ -125,8 +126,4 @@ public class Usuario implements Serializable {
 				+ "]";
 	}
 
-	
-
-
-	
 }

@@ -40,7 +40,7 @@ public class Vacante implements Serializable {
 	@Lob
 	private String detalles;
 	@OneToOne
-	@JoinColumn(name = "idcategoria") // foreignKey en la tabla de Vacantes	
+	@JoinColumn(name = "idcategoria") //FK en la tabla de Vacantes	
 	private Categoria categoria; // Categoria a la que pertence la oferta de trabajo
 	
 	public Vacante() {
