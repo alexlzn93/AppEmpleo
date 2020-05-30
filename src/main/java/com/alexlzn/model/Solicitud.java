@@ -23,11 +23,11 @@ public class Solicitud implements Serializable {
 	private Date fecha;
 
 	@OneToOne
-	@JoinColumn(name = "id_usuario") // foreignKey en la tabla de usuarios
+	@JoinColumn(name = "id_usuario") // fk en la tabla de usuarios
 	private Usuario usuario;
 
 	@OneToOne
-	@JoinColumn(name = "id_vacante") // foreignKey en la tabla de solicitudes
+	@JoinColumn(name = "id_vacante") // fk en la tabla de solicitudes
 	private Vacante vacante;
 
 	public Solicitud() {

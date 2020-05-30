@@ -19,7 +19,6 @@ import javax.persistence.TemporalType;
 
 import org.springframework.data.annotation.Transient;
 
-
 @Entity
 @Table(name = "vacantes")
 public class Vacante implements Serializable {
@@ -40,9 +39,9 @@ public class Vacante implements Serializable {
 	@Lob
 	private String detalles;
 	@OneToOne
-	@JoinColumn(name = "idcategoria") // foreignKey en la tabla de Vacantes	
+	@JoinColumn(name = "idcategoria") // foreignKey en la tabla de Vacantes
 	private Categoria categoria; // Categoria a la que pertence la oferta de trabajo
-	
+
 	public Vacante() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -128,8 +127,6 @@ public class Vacante implements Serializable {
 		this.categoria = categoria;
 	}
 
-	
-
 	public void resetImages() {
 		this.images = null;
 	}
@@ -140,7 +137,5 @@ public class Vacante implements Serializable {
 				+ ", salario=" + salario + ", destacado=" + destacado + ", images=" + images + ", status=" + status
 				+ ", detalles=" + detalles + ", categoria=" + categoria + "]";
 	}
-
-	
 
 }

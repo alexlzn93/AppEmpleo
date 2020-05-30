@@ -7,10 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
-/**
- * The persistent class for the perfiles database table.
- * 
- */
 @Entity
 @Table(name = "perfiles")
 
