@@ -50,6 +50,28 @@ public class UsuarioController {
 		attribute.addAttribute("mensaje", "El usuario fue eliminado");
 		return "redirect:/usuarios/index";
 	}
+	@GetMapping("/bloquear/{id}")
+	public String bloquearUsuario(@PathVariable("id") Integer idUser,Model model, RedirectAttributes attribute) {
+		System.out.println("Usuario bloqueado :" + idUser);
+		Usuario user= usuarioService.bloquearUsuario(idUser);
+	
+		System.out.println(user);
+		usuarioService.guardar(user);
+		
+		attribute.addAttribute("mensaje", "El usuario fue bloqueado");
+		return "redirect:/usuarios/index";
+	}
+	@GetMapping("/desbloquear/{id}")
+	public String desbloquearUsuario(@PathVariable("id") Integer idUser,Model model, RedirectAttributes attribute) {
+		System.out.println("Usuario desbloqueado :" + idUser);
+		Usuario user= usuarioService.desbloquearUsuario(idUser);
+		System.out.println(user);
+		usuarioService.guardar(user);
+		
+		attribute.addAttribute("mensaje", "El usuario fue desbloqueado");
+		return "redirect:/usuarios/index";
+	}
+
 	
 	
 	
