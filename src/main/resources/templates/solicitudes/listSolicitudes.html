@@ -43,7 +43,7 @@
                 <tr th:each="solicitud : ${solicitudes}">
                   <td th:text="${solicitud.vacante.categoria.nombre}"></td>
                   <td th:text="${solicitud.vacante.nombre}"></td>
-                  <td th:text="${solicitud.usuario.nombre}"></td>
+                  <td th:text="${solicitud.usuario.nombre}"></td><!-- nombre del usuario que aplico la solicitud -->
                   <td th:text="${solicitud.fecha}"></td>
                   <td>
                     <a th:href="@{/solicitud/editar/{id} (id=${solicitud.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
